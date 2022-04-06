@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-
+#include <errno.h>
 
 int
 main(void)
