@@ -57,8 +57,9 @@ recursive(DIR *directory,
 		if (entry->d_type == DT_REG) {
 			validate(actually_path, entry->d_name, subword, function);
 		}
+		// close(direct);
+		closedir(new_directory);
 	}
-	closedir(directory);
 }
 
 int
@@ -79,5 +80,6 @@ main(int argc, char *argv[])
 		recursive(directory, subword, initial_path, strstr);
 	}
 
+	closedir(directory);
 	return 0;
 }
