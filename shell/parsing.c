@@ -101,8 +101,21 @@ parse_environ_var(struct execcmd *c, char *arg)
 static char *
 expand_environ_var(char *arg)
 {
-	// Your code here
-
+	if (strlen(arg) > 1){
+		if (arg[0] == '$'){
+			if ((strlen(arg) == 2) && (strcmp((arg + 1), "?") == 0)) {
+				sprintf(arg, "%d", status);
+			} else {
+				char *env = getenv(&arg[1]);
+				if (env == NULL || strlen(env) == 0){
+					return NULL;
+				} else if (strlen(env) > strlen(arg)){
+					arg = (char *) realloc(arg, strlen(env));
+				}
+				strcpy(arg, env);
+			}
+		}
+	}
 	return arg;
 }
 
@@ -188,8 +201,17 @@ parse_line(char *buf)
 
 	char *right = split_line(buf, '|');
 
+	// Agregamos recursividad: en caso de tuberias multiples, el lado izquierdo 
+	// es un comando, el lado derecho un pipecmd, con lado derecho e izquierdo
+	// almacenando otro comando en el izquierdo, y pudiendo ser el lado derecho 
+	// de este pipecmd el comando final, o otro pipe cmd
+	if (block_contains(right, '|') != -1) {
+		r = parse_line(right);
+	} else {
+		r = parse_cmd(right);
+	}
+
 	l = parse_cmd(buf);
-	r = parse_cmd(right);
 
 	return pipe_cmd_create(l, r);
 }

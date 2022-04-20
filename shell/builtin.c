@@ -7,8 +7,9 @@
 int
 exit_shell(char *cmd)
 {
-	// Your code here
-
+	if (strcmp(cmd, "exit") == 0){
+		exit(0);
+	}
 	return 0;
 }
 
@@ -26,9 +27,40 @@ exit_shell(char *cmd)
 //  2. cmd = ['c','d', '\0']
 int
 cd(char *cmd)
-{
-	// Your code here
-
+{ 
+	if (strlen(cmd) > 1){
+		bool is_cd = cmd[0] == 'c' && cmd[1] == 'd';
+		int n;
+		if (strlen(cmd) > 3){
+			if (is_cd){
+				char *path = &cmd[3];
+				n = chdir(path);
+				if(n == 0)              
+				{
+					if(getcwd(promt, (size_t) BUFLEN) == NULL){
+						perror("Error en actualizacion del promt");
+						exit(1);
+					}
+					return 1;
+				} else{
+					return 1;
+				}
+			}
+		} else {
+				char *dir_home = getenv("HOME");
+				n = chdir(dir_home);
+				if(n == 0)              
+				{
+					if(getcwd(promt, (size_t) BUFLEN) == NULL){
+						perror("Error en actualizacion del promt");
+						exit(1);
+					}
+					return 1;
+				} else{
+					return 1;
+				}
+		}
+	} 
 	return 0;
 }
 
@@ -40,7 +72,13 @@ cd(char *cmd)
 int
 pwd(char *cmd)
 {
-	// Your code here
-
+	if (strcmp(cmd, "pwd") == 0) {
+			if(getcwd(promt, (size_t) BUFLEN) == NULL){
+				perror("Error en actualizacion del promt");
+				exit(1);
+			};
+			printf("%s\n", promt);
+			return 1;
+	}
 	return 0;
 }

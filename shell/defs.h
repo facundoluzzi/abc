@@ -48,4 +48,9 @@
 
 #define EXIT_SHELL 1
 
+// fd numbers for stderr stdout and stdin
+#define STDIN 0
+#define STDOUT 1
+#define STDERR 2
+
 #endif  // DEFS_H
