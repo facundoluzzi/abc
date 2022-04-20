@@ -49,9 +49,9 @@ static void
 set_environ_vars(char **eargv, int eargc)
 {
 	int n = 0;
-	while (n < eargc){
-		char* to_expand = eargv[n];
-		char* value = split_line(to_expand, '=');
+	while (n < eargc) {
+		char *to_expand = eargv[n];
+		char *value = split_line(to_expand, '=');
 		setenv(to_expand, value, 1);
 		n++;
 	}
@@ -66,7 +66,7 @@ set_environ_vars(char **eargv, int eargc)
 //
 // Hints:
 // - if O_CREAT is used, add S_IWUSR and S_IRUSR
-// 	to make it a readable normal file	
+// 	to make it a readable normal file
 static int
 open_redir_fd(char *file, int flags)
 {
@@ -127,7 +127,8 @@ exec_cmd(struct cmd *cmd)
 
 		if (i == 0) {
 			if (execvp(command, args) < 0) {
-				printf("Error en la ejecucion del comando (EXECVP)\n");
+				printf("Error en la ejecucion del comando "
+				       "(EXECVP)\n");
 				exit(-1);
 			}
 		} else {
@@ -156,7 +157,7 @@ exec_cmd(struct cmd *cmd)
 
 		if (strlen(r->in_file) > 0) {
 			fds[0] = open_redir_fd(r->in_file, O_RDWR);
-			if (dup2(fds[0], STDIN) == -1){
+			if (dup2(fds[0], STDIN) == -1) {
 				exit(1);
 			}
 			close(fds[0]);
@@ -164,21 +165,21 @@ exec_cmd(struct cmd *cmd)
 		if (strlen(r->out_file) > 0) {
 			fds[1] = open_redir_fd(r->out_file,
 			                       O_RDWR | O_CREAT | O_TRUNC);
-			if (dup2(fds[1], STDOUT) == -1){
+			if (dup2(fds[1], STDOUT) == -1) {
 				exit(1);
 			}
 			close(fds[1]);
 		}
 
 		if (strlen(r->err_file) > 0) {
-			if (strlen(r->out_file) > 0){
-				if (dup2(STDOUT, STDERR) == -1){
+			if (strlen(r->out_file) > 0) {
+				if (dup2(STDOUT, STDERR) == -1) {
 					exit(1);
 				}
-			} else{
+			} else {
 				fds[2] = open_redir_fd(r->err_file,
-									O_RDWR | O_CREAT | O_TRUNC);
-				if (dup2(fds[2], STDERR) == -1){
+				                       O_RDWR | O_CREAT | O_TRUNC);
+				if (dup2(fds[2], STDERR) == -1) {
 					exit(1);
 				}
 				close(fds[2]);
@@ -202,9 +203,9 @@ exec_cmd(struct cmd *cmd)
 		if (v < 0) {
 			_exit(-1);
 		}
-		
+
 		int i = fork();
-		if (i < 0){
+		if (i < 0) {
 			perror("Error en FORK");
 			exit(-1);
 		}
@@ -214,14 +215,14 @@ exec_cmd(struct cmd *cmd)
 			close(file_descriptor[1]);
 			exec_cmd(p->leftcmd);
 			exit(-1);
-		} 
+		}
 
 		int m = fork();
-		if (m < 0){
+		if (m < 0) {
 			perror("Error en FORK");
 			exit(-1);
 		}
-		if (m == 0){
+		if (m == 0) {
 			close(file_descriptor[1]);
 			dup2(file_descriptor[0], 0);
 			close(file_descriptor[0]);
