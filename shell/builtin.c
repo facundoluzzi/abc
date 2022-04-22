@@ -31,8 +31,8 @@ cd(char *cmd)
 	if (strlen(cmd) > 1) {
 		bool is_cd = cmd[0] == 'c' && cmd[1] == 'd';
 		int n;
-		if (strlen(cmd) > 3) {
-			if (is_cd) {
+		if (is_cd) {
+			if (strlen(cmd) > 3) {
 				char *path = &cmd[3];
 				n = chdir(path);
 				if (n == 0) {
@@ -46,19 +46,21 @@ cd(char *cmd)
 				} else {
 					return 1;
 				}
-			}
-		} else {
-			char *dir_home = getenv("HOME");
-			n = chdir(dir_home);
-			if (n == 0) {
-				if (getcwd(promt, (size_t) BUFLEN) == NULL) {
-					perror("Error en actualizacion del "
-					       "promt");
-					exit(1);
-				}
-				return 1;
 			} else {
-				return 1;
+				char *dir_home = getenv("HOME");
+				n = chdir(dir_home);
+				if (n == 0) {
+					if (getcwd(promt, (size_t) BUFLEN) ==
+					    NULL) {
+						perror("Error en actualizacion "
+						       "del "
+						       "promt");
+						exit(1);
+					}
+					return 1;
+				} else {
+					return 1;
+				}
 			}
 		}
 	}
