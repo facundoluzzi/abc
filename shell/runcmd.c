@@ -27,6 +27,10 @@ run_cmd(char *cmd)
 	if (pwd(cmd))
 		return 0;
 
+	// "pwd" buil-in call
+	if (history(cmd))
+		return 0;
+
 	// parses the command line
 	parsed = parse_line(cmd);
 

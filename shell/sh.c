@@ -2,7 +2,7 @@
 #include "types.h"
 #include "readline.h"
 #include "runcmd.h"
-
+#include "history.h"
 char promt[PRMTLEN] = { 0 };
 
 // runs a shell command
@@ -30,6 +30,7 @@ init_shell()
 	} else {
 		snprintf(promt, sizeof promt, "(%s)", home);
 	}
+	initialize_history();
 }
 
 int

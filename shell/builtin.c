@@ -85,3 +85,13 @@ pwd(char *cmd)
 	}
 	return 0;
 }
+
+int
+history(char *cmd)
+{
+	if (strcmp(cmd, "history") == 0) {
+		history_cmd();
+		return 1;
+	}
+	return 0;
+}
