@@ -3,7 +3,6 @@
 
 #include "defs.h"
 
-void exit_history (void);
 void initialize_history (void);
 
 char * get_history_down (void);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "defs.h"
+#include "utils.h"
 #include "history.h"
 
 static FILE * history_file = NULL;
@@ -58,7 +59,7 @@ void push_cmd(char *command){
     }
     history_file = fopen(history_file_dir, "a");
     lines++;
-    fprintf(history_file,"%s\n", command);
+    fprintf_debug(history_file,"%s\n", command);
     fclose(history_file);
     return;
 }
@@ -87,7 +88,7 @@ int history_cmd(int n){
             }
     }
     while (getline(&line, &len, history_file) != -1){
-        printf("%s", line);
+        printf_debug("%s", line);
     }
     fclose(history_file);
     return 0;
