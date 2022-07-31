@@ -19,3 +19,7 @@ sh.c
 types.h
 utils.c
 utils.h
+history.c
+history.h
+noncanonic_mode.c
+noncanonic_mode.h
