@@ -72,6 +72,7 @@ int history_cmd(int n){
 
     char *line;
     size_t len = 0;
+    actual = 0;
 
     if( n != 0 ){
         int lines_count = 0;
