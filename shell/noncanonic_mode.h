@@ -3,4 +3,4 @@
 
 void set_input_mode(void);
 
-#endif // NONCANONIC_MODE_H
+#endif  // NONCANONIC_MODE_H
