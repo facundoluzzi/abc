@@ -1,4 +1,7 @@
+cp.c
 find.c
+ls.c
 pingpong.c
 primes.c
+ps.c
 xargs.c

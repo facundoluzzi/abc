@@ -10,6 +10,9 @@ find: find.o
 xargs: xargs.o
 primes: primes.o
 pingpong: pingpong.o
+ls: ls.o
+ps: ps.o
+cp: cp.o
 
 format: .clang-files .clang-format
 	xargs -r clang-format -i <$<
