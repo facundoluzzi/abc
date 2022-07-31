@@ -17,8 +17,6 @@ void clearConsole(size_t *row, size_t *col);
 char *
 read_line(const char *promt)
 {
-	set_input_mode();
-
 	int i = 0, c = 0;
 
 	size_t col = 0, row = 0;
@@ -26,7 +24,7 @@ read_line(const char *promt)
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	int MAX_LENGTH = w.ws_col - 2;
 	if (!MAX_LENGTH || MAX_LENGTH < 1) {
-		MAX_LENGTH = 50;
+		MAX_LENGTH = 60;
 	}
 #ifndef SHELL_NO_INTERACTIVE
 	fprintf(stdout, "%s %s %s\n", COLOR_RED, promt, COLOR_RESET);
@@ -37,7 +35,7 @@ read_line(const char *promt)
 	memset(buffer, 0, BUFLEN);
 
 	while (1) {
-		read(STDIN_FILENO, &c, 1);
+		int u __attribute__((unused)) = read(STDIN_FILENO, &c, 1);
 
 		switch (c) {
 		case EOF:
@@ -71,10 +69,10 @@ void
 esc(int *i, size_t *row, size_t *col, int MAX_LENGTH)
 {
 	int c = 0;
-	read(STDIN_FILENO, &c, 1);
+	int u __attribute__((unused)) = read(STDIN_FILENO, &c, 1);
 	switch (c) {
 	case '[':
-		read(STDIN_FILENO, &c, 1);
+		u = read(STDIN_FILENO, &c, 1);
 		switch (c) {
 		case 'A':
 			strcpy(buffer, get_history_up());
