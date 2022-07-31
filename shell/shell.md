@@ -146,4 +146,14 @@ No existe el fichero o el directorio
     bash -c 'echo $$; exec prueba'
 	19550
 
+---
 
+### Desafio Shell:
+
+#### ¿Cuál es la función de los parámetros MIN y TIME del modo no canónico? ¿Qué se logra en el ejemplo dado al establecer a MIN en 1 y a TIME en 0?
+
+El parametro MIN indica el numero minimo de bytes para que la funcion read retorne. Por otro lado, el parametro TIME indica el tiempo que espera un input la funcion read antes de retornar. 
+
+En el ejemplo como TIME es 0, y read tiene un valor distinto de 0, lo que ocurre es que la funcion read espera a que haya al menos MIN (en este caso 1) bytes disponibles en la queue. Cuando hay MIN bytes disponibles, read devuelve tantos caracteres como esten disponibles, hasta el numero solicitado (1). Entonces, read va a retornar cuando logre encontrar 1 byte en la queue.
+
+---

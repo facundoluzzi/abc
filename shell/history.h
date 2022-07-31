@@ -3,14 +3,14 @@
 
 #include "defs.h"
 
-void exit_history ();
-void initialize_history ();
+void exit_history (void);
+void initialize_history (void);
 
-char * get_with_down_key ();
-char * get_with_up_key ();
+char * get_history_down (void);
+char * get_history_up (void);
 
 void push_cmd (char *command);
 
-int history_cmd ();
-
+int history_cmd (int n);
+char *get_line_position(int position);
 #endif  // HISTORY_H

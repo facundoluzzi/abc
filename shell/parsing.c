@@ -1,5 +1,5 @@
 #include "parsing.h"
-
+#include "history.h"
 // parses an argument of the command stream input
 static char *
 get_token(char *buf, int idx)
@@ -114,6 +114,23 @@ expand_environ_var(char *arg)
 				}
 				strcpy(arg, env);
 			}
+		}
+	}
+	// Desafio Shell
+	if (strlen(arg) > 1) {
+		if (arg[0] == '!') {
+			switch (arg[1]) {
+			case '!':
+				strcpy(arg, get_line_position(2));
+				break;
+			case '-':
+				strcpy(arg, get_line_position(atoi(arg + 2) + 1));
+				break;
+			default:
+				strcpy(arg, "");
+				break;
+			}
+			return arg;
 		}
 	}
 	return arg;

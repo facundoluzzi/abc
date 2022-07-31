@@ -89,8 +89,10 @@ pwd(char *cmd)
 int
 history(char *cmd)
 {
-	if (strcmp(cmd, "history") == 0) {
-		history_cmd();
+	char aux[10] = "";
+	if (strcmp(strncpy(aux, cmd, 7), "history") == 0) {
+		int n = atoi(cmd + 8);
+		history_cmd(n);
 		return 1;
 	}
 	return 0;

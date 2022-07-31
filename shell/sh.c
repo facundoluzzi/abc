@@ -3,6 +3,7 @@
 #include "readline.h"
 #include "runcmd.h"
 #include "history.h"
+#include "noncanonic_mode.h"
 char promt[PRMTLEN] = { 0 };
 
 // runs a shell command
@@ -21,6 +22,7 @@ run_shell()
 static void
 init_shell()
 {
+	set_input_mode();
 	char buf[BUFLEN] = { 0 };
 	char *home = getenv("HOME");
 
