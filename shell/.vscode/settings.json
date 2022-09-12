@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "llist.h": "c",
+        "noncanonic_mode.h": "c",
+        "typeinfo": "c",
+        "sstream": "c",
+        "algorithm": "c",
+        "defs.h": "c"
+    }
+}
